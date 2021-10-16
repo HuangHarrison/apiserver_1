@@ -17,15 +17,18 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	g.Use(middleware.NoCache)
 	g.Use(middleware.Options)
 	g.Use(middleware.Secure)
-	g.Use(middleware.Logging())
-	g.Use(middleware.RequestId())
 	g.Use(mw...)
 	// 404 Handler.
 	g.NoRoute(func(c *gin.Context) {
 		c.String(http.StatusNotFound, "The incorrect API route.")
 	})
 
+	// api for authentication functionalities
+	g.POST("/login", user.Login) // 采用明文方式校验账号和密码， 登录后产生token
+
+	// The user handlers, requiring authentication
 	u := g.Group("/v1/user")
+	u.Use(middleware.AuthMiddleware()) // 利用中间件进行 Token 校验
 	{
 		u.POST("", user.Create)       // 创建账号
 		u.DELETE("/:id", user.Delete) // 删除账号

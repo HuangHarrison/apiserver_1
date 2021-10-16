@@ -3,6 +3,7 @@ addr: :8080                 # HTTP 绑定端口
 name: apiserver             # API Server 的名字
 url: http://127.0.0.1:8080  # pingServer 函数请求的 API 服务器的 ip:port
 max_ping_count: 10          # pingServer 函数 try 的次数
+jwt_secret: Rtg8BPKNEf2mB4mgvKONGPZZQSaJWNLijxR42qRgq0iBb5  # jwt 密钥
 log:
   writers: file,stdout            # 输出位置，file/stdout
   logger_level: DEBUG             # 日志级别，DEBUG/INFO/WARN/ERROR/FATAL
