@@ -1,0 +1,6 @@
+.git
+.idea
+vendor
+go.mod
+go.sum
+log

@@ -1,0 +1,24 @@
+runmode: debug              # 开发模式， debug/ release/ test
+addr: :8080                 # HTTP 绑定端口
+name: apiserver             # API Server 的名字
+url: http://127.0.0.1:8080  # pingServer 函数请求的 API 服务器的 ip:port
+max_ping_count: 10          # pingServer 函数 try 的次数
+log:
+  writers: file,stdout            # 输出位置，file/stdout
+  logger_level: DEBUG             # 日志级别，DEBUG/INFO/WARN/ERROR/FATAL
+  logger_file: log/apiserver.log  # 日志文件
+  log_format_text: false          # 日志的输出格式 true:非JSON/false:JSON
+  rollingPolicy: size             # rotate依据，daily:根据天进行转存/size:根据大小进行转存
+  log_rotate_date: 1              # rotate转存时间， 配合rolingPolicy: daily 使用
+  log_rotate_size: 1              # rotate转存大小， 配合rolingPolicy: size 使用
+  log_backup_count: 7             # 当日志文件达到转存标准时, log系统根据该日志文件进行压缩备份，这里指定备份文件的最大个数
+db:
+  name: db_apiserver
+  addr: 127.0.0.1:3306
+  username: root
+  password: root
+docker_db:
+  name: db_apiserver
+  addr: 127.0.0.1:3306
+  username: root
+  password: root
