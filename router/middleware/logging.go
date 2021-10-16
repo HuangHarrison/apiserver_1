@@ -19,6 +19,11 @@ type bodyLogWriter struct {
 	body *bytes.Buffer
 }
 
+func (w bodyLogWriter) Write(b []byte) (int, error) {
+	w.body.Write(b)
+	return w.ResponseWriter.Write(b)
+}
+
 // Logging is a middleware function that logs the each request.
 func Logging() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -51,15 +56,15 @@ func Logging() gin.HandlerFunc {
 
 		// log.Debugf("New request come in, path: %s, Method: %s, body `%s`", path, method, string(bodyBytes))
 		blw := &bodyLogWriter{
-			ResponseWriter: c.Writer,
 			body:           bytes.NewBufferString(""),
+			ResponseWriter: c.Writer,
 		}
 		c.Writer = blw
 
 		// Continue.
 		c.Next()
 
-		// Calculates the latency
+		// Calculates the latency.
 		end := time.Now().UTC()
 		latency := end.Sub(start)
 
