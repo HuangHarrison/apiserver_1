@@ -4,3 +4,5 @@ vendor
 go.mod
 go.sum
 log
+/conf/server.crt
+/conf/server.key
