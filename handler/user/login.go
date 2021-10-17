@@ -17,12 +17,14 @@ func Login(c *gin.Context) {
 	var u model.UserModel
 	if err := c.Bind(&u); err != nil {
 		SendResponse(c, errno.ErrBind, nil)
+		return
 	}
 
 	// Get the information by the login username.
 	d, err := model.GetUser(u.Username)
 	if err != nil {
 		SendResponse(c, errno.ErrUserNotFound, nil)
+		return
 	}
 
 	// Compare the login password with the user password

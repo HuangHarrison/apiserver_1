@@ -4,11 +4,15 @@ name: apiserver             # API Server 的名字
 url: http://127.0.0.1:8080  # pingServer 函数请求的 API 服务器的 ip:port
 max_ping_count: 10          # pingServer 函数 try 的次数
 jwt_secret: Rtg8BPKNEf2mB4mgvKONGPZZQSaJWNLijxR42qRgq0iBb5  # jwt 密钥
+tls:
+  addr: :8081           # HTTPS 端口
+  cert: conf/server.crt # 自签发的数字证书
+  key: conf/server.key  # 私钥文件
 log:
-  writers: file,stdout            # 输出位置，file/stdout
+  writers: stdout                 # 输出位置，file/stdout
   logger_level: DEBUG             # 日志级别，DEBUG/INFO/WARN/ERROR/FATAL
   logger_file: log/apiserver.log  # 日志文件
-  log_format_text: false          # 日志的输出格式 true:非JSON/false:JSON
+  log_format_text: true           # 日志的输出格式 true:非JSON/false:JSON
   rollingPolicy: size             # rotate依据，daily:根据天进行转存/size:根据大小进行转存
   log_rotate_date: 1              # rotate转存时间， 配合rolingPolicy: daily 使用
   log_rotate_size: 1              # rotate转存大小， 配合rolingPolicy: size 使用
