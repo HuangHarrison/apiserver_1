@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 BASEDIR = $(shell pwd)
 
-# build width version infos
+# build with verison infos
 versionDir = "apiserver/pkg/version"
 gitTag = $(shell if [ "`git describe --tags --abbrev=0 2>/dev/null`" != "" ];then git describe --tags --abbrev=0; else git log --pretty=format:'%h' -n 1; fi)
 buildDate = $(shell TZ=Asia/Shanghai date +%FT%T%z)
