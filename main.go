@@ -28,8 +28,8 @@ var (
 func main() {
 	pflag.Parse()
 	if *version {
-		v := v.Get()
-		marshalled, err := json.MarshalIndent(&v, "", "  ") // 格式化打印版本信息
+		ver := v.Get()
+		marshalled, err := json.MarshalIndent(&ver, "", "  ") // 格式化打印版本信息
 		if err != nil {
 			fmt.Printf("%v\n", err)
 			os.Exit(1)
