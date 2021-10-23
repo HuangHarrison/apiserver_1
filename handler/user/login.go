@@ -20,7 +20,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	// Get the information by the login username.
+	// Get the user information by the login username.
 	d, err := model.GetUser(u.Username)
 	if err != nil {
 		SendResponse(c, errno.ErrUserNotFound, nil)
